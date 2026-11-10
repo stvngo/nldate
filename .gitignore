@@ -19,3 +19,6 @@ htmlcov/
 
 # OS / editor
 .DS_Store
+
+# Local-only metadata
+repo_url.txt
