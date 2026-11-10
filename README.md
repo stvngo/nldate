@@ -65,24 +65,24 @@ from nldate import parse
 
 ref = datetime.date(2025, 11, 12)  # a Wednesday
 
-parse("tomorrow", today=ref)                                   # 2025-11-13
-parse("Next Tuesday", today=ref)                               # 2025-11-18
-parse("last Friday", today=ref)                                # 2025-11-07
-parse("in three days", today=ref)                              # 2025-11-15
-parse("three days ago", today=ref)                             # 2025-11-09
-parse("Two weeks from tomorrow", today=ref)                    # 2025-11-27
-parse("One year and two months after yesterday", today=ref)    # 2027-01-11
+parse("tomorrow", today=ref)  # 2025-11-13
+parse("Next Tuesday", today=ref)  # 2025-11-18
+parse("last Friday", today=ref)  # 2025-11-07
+parse("in three days", today=ref)  # 2025-11-15
+parse("three days ago", today=ref)  # 2025-11-09
+parse("Two weeks from tomorrow", today=ref)  # 2025-11-27
+parse("One year and two months after yesterday", today=ref)  # 2027-01-11
 
 # Absolute dates ignore the reference date
-parse("December 1st, 2025", today=ref)                         # 2025-12-01
-parse("2025-12-01", today=ref)                                 # 2025-12-01
-parse("Five days before December 1st, 2025", today=ref)        # 2025-11-26
+parse("December 1st, 2025", today=ref)  # 2025-12-01
+parse("2025-12-01", today=ref)  # 2025-12-01
+parse("Five days before December 1st, 2025", today=ref)  # 2025-11-26
 ```
 
 When `today` is omitted, relative expressions resolve against the current date:
 
 ```python
-parse("in three days")   # three days from today
+parse("in three days")  # three days from today
 ```
 
 ## Supported expressions
@@ -112,9 +112,9 @@ A few conventions are worth calling out:
 Any input that isn't a recognized date — including the empty string — raises `ValueError`:
 
 ```python
-parse("")               # ValueError
-parse("not a date")     # ValueError
-parse("banana")         # ValueError
+parse("")  # ValueError
+parse("not a date")  # ValueError
+parse("banana")  # ValueError
 ```
 
 ## Command line
