@@ -95,6 +95,25 @@ def test_absolute_dates(text: str, expected: date) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Slash-separated, year-first dates (YYYY/MM/DD), e.g. "2025/12/04".
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("2025/12/04", date(2025, 12, 4)),
+        ("2025/12/4", date(2025, 12, 4)),
+        ("2026/01/03", date(2026, 1, 3)),
+        ("2025/2/9", date(2025, 2, 9)),
+    ],
+)
+def test_slash_year_first_dates(text: str, expected: date) -> None:
+    # Year-first slash dates do not depend on the reference date.
+    assert parse(text, today=TODAY) == expected
+
+
+# ---------------------------------------------------------------------------
 # Relative offsets ("in N units", "N units ago", "N units from/before X").
 # ---------------------------------------------------------------------------
 
