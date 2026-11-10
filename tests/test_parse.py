@@ -28,7 +28,9 @@ TODAY = date(2025, 11, 12)  # Wednesday
 
 def test_five_days_before_absolute_date() -> None:
     # "Five days before December 1st, 2025" -> Dec 1 minus 5 days.
-    assert parse("Five days before December 1st, 2025", today=TODAY) == date(2025, 11, 26)
+    assert parse("Five days before December 1st, 2025", today=TODAY) == date(
+        2025, 11, 26
+    )
 
 
 def test_next_tuesday() -> None:
@@ -38,7 +40,9 @@ def test_next_tuesday() -> None:
 
 def test_one_year_and_two_months_after_yesterday() -> None:
     # yesterday = 2025-11-11; +1 year +2 months -> 2027-01-11.
-    assert parse("One year and two months after yesterday", today=TODAY) == date(2027, 1, 11)
+    assert parse("One year and two months after yesterday", today=TODAY) == date(
+        2027, 1, 11
+    )
 
 
 def test_two_weeks_from_tomorrow() -> None:
@@ -144,15 +148,17 @@ def test_weekdays(text: str, expected: date) -> None:
 
 
 def test_compound_duration_after() -> None:
-    assert parse("one year and two months after today", today=TODAY) == date(2027, 1, 12)
+    assert parse("one year and two months after today", today=TODAY) == date(
+        2027, 1, 12
+    )
 
 
 def test_compound_duration_before() -> None:
     # "two months and ten days before December 1st, 2025"
     # Dec 1 2025 - 2 months -> 2025-10-01; - 10 days -> 2025-09-21.
-    assert parse("two months and ten days before December 1st, 2025", today=TODAY) == date(
-        2025, 9, 21
-    )
+    assert parse(
+        "two months and ten days before December 1st, 2025", today=TODAY
+    ) == date(2025, 9, 21)
 
 
 # ---------------------------------------------------------------------------
