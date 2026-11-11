@@ -134,6 +134,11 @@ _RELATIONS: tuple[tuple[str, int], ...] = (
 
 _WEEKDAY_MODIFIERS = frozenset({"next", "this", "last", "coming", "upcoming"})
 
+# Filler words skipped while reading a duration (e.g. "the day", "one year and
+# two months"). "the" gives an implicit count of one, as in "the day after
+# tomorrow".
+_DURATION_FILLER = frozenset({"and", "the"})
+
 _ORDINAL_RE = re.compile(r"\b(\d+)(?:st|nd|rd|th)\b")
 _ISO_RE = re.compile(r"(\d{4})-(\d{1,2})-(\d{1,2})")
 _SLASH_RE = re.compile(r"(\d{1,2})/(\d{1,2})/(\d{4})")
@@ -194,7 +199,7 @@ def _parse_duration(text: str) -> tuple[int, int]:
     number_words: list[str] = []
     matched = False
     for token in text.split():
-        if token == "and":
+        if token in _DURATION_FILLER:
             continue
         if token in _UNITS:
             quantity = _words_to_number(number_words) if number_words else 1
