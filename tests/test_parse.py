@@ -165,6 +165,25 @@ def test_before_relative_anchor() -> None:
 
 
 # ---------------------------------------------------------------------------
+# "the day after/before X" phrasing (a leading "the" with an implicit count).
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("the day after tomorrow", date(2025, 11, 14)),
+        ("The day after tomorrow", date(2025, 11, 14)),
+        ("the day before yesterday", date(2025, 11, 10)),
+        ("the day after December 1st, 2025", date(2025, 12, 2)),
+        ("the week after next Friday", date(2025, 11, 21)),
+    ],
+)
+def test_the_day_after_before(text: str, expected: date) -> None:
+    assert parse(text, today=TODAY) == expected
+
+
+# ---------------------------------------------------------------------------
 # Weekday expressions.
 # ---------------------------------------------------------------------------
 
