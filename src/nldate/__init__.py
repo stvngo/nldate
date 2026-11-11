@@ -144,8 +144,12 @@ _SLASH_YMD_RE = re.compile(r"(\d{4})/(\d{1,2})/(\d{1,2})")
 
 
 def _normalize(text: str) -> str:
-    """Lower-case, drop commas and ordinal suffixes, and collapse whitespace."""
-    lowered = text.strip().lower().replace(",", " ")
+    """Lower-case, drop commas/periods and ordinal suffixes, collapse whitespace.
+
+    Periods are dropped so an abbreviated month name written with a trailing
+    period (e.g. ``"Dec."``) matches the month table.
+    """
+    lowered = text.strip().lower().replace(",", " ").replace(".", " ")
     without_ordinals = _ORDINAL_RE.sub(r"\1", lowered)
     return " ".join(without_ordinals.split())
 
