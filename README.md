@@ -93,7 +93,7 @@ parse("in three days")  # three days from today
 | Absolute dates | `December 1st, 2025`, `Dec 1 2025`, `Dec. 1, 2025`, `1 December 2025`, `2025-12-01`, `2025/12/04`, `12/1/2025` | Ordinals (`1st`, `3rd`), commas, and a trailing period on an abbreviated month (`Dec.`) are tolerated; slash dates may be year-first `YYYY/MM/DD` or month-first `M/D/Y` |
 | Weekdays | `next Tuesday`, `this Monday`, `last Friday`, `Sunday` | Full names and common abbreviations (`Tue`, `Weds`, …) |
 | Relative offsets | `in three days`, `3 days ago`, `in a week`, `in one month` | |
-| Offsets from an anchor | `two weeks from tomorrow`, `a week before tomorrow`, `five days before December 1st, 2025` | Anchor may be a keyword, weekday, or absolute date |
+| Offsets from an anchor | `two weeks from tomorrow`, `a week before tomorrow`, `the day after tomorrow`, `five days before December 1st, 2025` | Anchor may be a keyword, weekday, or absolute date; a leading `the` means one unit |
 | Compound durations | `one year and two months after yesterday`, `two months and ten days before December 1st, 2025` | |
 
 Supported duration units: **days**, **weeks**, **fortnights**, **months**, **years**. Quantities may be digits (`3`), number words (`three`), or the articles `a`/`an` (meaning 1).
