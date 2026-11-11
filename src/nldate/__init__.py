@@ -137,6 +137,7 @@ _WEEKDAY_MODIFIERS = frozenset({"next", "this", "last", "coming", "upcoming"})
 _ORDINAL_RE = re.compile(r"\b(\d+)(?:st|nd|rd|th)\b")
 _ISO_RE = re.compile(r"(\d{4})-(\d{1,2})-(\d{1,2})")
 _SLASH_RE = re.compile(r"(\d{1,2})/(\d{1,2})/(\d{4})")
+_SLASH_YMD_RE = re.compile(r"(\d{4})/(\d{1,2})/(\d{1,2})")
 
 
 # --- Normalization ---------------------------------------------------------
@@ -257,8 +258,11 @@ def _parse_absolute(text: str) -> date | None:
         iso = _ISO_RE.fullmatch(tokens[0])
         if iso is not None:
             return _safe_date(int(iso[1]), int(iso[2]), int(iso[3]))
+        ymd = _SLASH_YMD_RE.fullmatch(tokens[0])
+        if ymd is not None:  # year-first: YYYY/MM/DD
+            return _safe_date(int(ymd[1]), int(ymd[2]), int(ymd[3]))
         slash = _SLASH_RE.fullmatch(tokens[0])
-        if slash is not None:  # interpreted as month/day/year
+        if slash is not None:  # month-first: M/D/Y
             return _safe_date(int(slash[3]), int(slash[1]), int(slash[2]))
         return None
     if len(tokens) == 3:
