@@ -114,6 +114,27 @@ def test_slash_year_first_dates(text: str, expected: date) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Abbreviated month names with a trailing period, e.g. "Dec. 1, 2025".
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("Dec. 1, 2025", date(2025, 12, 1)),
+        ("Dec. 1 2025", date(2025, 12, 1)),
+        ("Jan. 3rd, 2026", date(2026, 1, 3)),
+        ("Sep. 9, 2025", date(2025, 9, 9)),
+        ("Feb. 28, 2024", date(2024, 2, 28)),
+        ("1 Dec. 2025", date(2025, 12, 1)),
+    ],
+)
+def test_abbreviated_month_with_period(text: str, expected: date) -> None:
+    # A trailing period on an abbreviated month name should be tolerated.
+    assert parse(text, today=TODAY) == expected
+
+
+# ---------------------------------------------------------------------------
 # Relative offsets ("in N units", "N units ago", "N units from/before X").
 # ---------------------------------------------------------------------------
 
